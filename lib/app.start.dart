@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fun/constants.dart';
 
+import 'state.management/state.management.dart';
 import 'ui/ui.dart';
 // import 'package:lottie/lottie.dart';
 
@@ -146,7 +147,13 @@ List<Features> features(BuildContext cxt) => [
         name: 'State Management',
         description: 'All state managments',
         image: '${smJson}state.management.json',
-        onPress: () {},
+        onPress: () {
+          Navigator.push(
+              cxt,
+              MaterialPageRoute(
+                builder: (_) => const StateManagement(),
+              ));
+        },
         icon: Icons.fiber_manual_record,
       ),
       Features(
