@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_fun/state.management/bloc/bloc.todo/cubit/todo.cubit.dart';
+import 'package:flutter_fun/state.management/bloc/bloc.todo/model/todo.model.dart';
 
 class TodoScreen extends StatefulWidget {
   const TodoScreen({super.key});
@@ -9,6 +12,7 @@ class TodoScreen extends StatefulWidget {
 
 class _TodoScreenState extends State<TodoScreen> {
   TextEditingController controller = TextEditingController();
+  final TodoCubit _todoCubit = TodoCubit();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,8 +25,31 @@ class _TodoScreenState extends State<TodoScreen> {
           controller: controller,
         ),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            _todoCubit.addTodo(controller.text.trim());
+            controller.clear();
+          },
           child: const Text("Add Todo"),
+        ),
+        BlocBuilder(
+          bloc: _todoCubit,
+          builder: (context, List<TodoModel> state) {
+            return ListView.builder(
+              shrinkWrap: true,
+              itemCount: state.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(state[index].activity),
+                  trailing: IconButton(
+                    onPressed: () {
+                      // _todoCubit.delete(state[index]);
+                    },
+                    icon: const Icon(Icons.delete),
+                  ),
+                );
+              },
+            );
+          },
         )
       ]),
     );
