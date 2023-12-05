@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_fun/state.management/bloc.counter.app/cubit/counter.cubit.dart';
+
+import '../cubit/counter.cubit.dart';
 
 class IncrementDecrementPage extends StatelessWidget {
   const IncrementDecrementPage({super.key});

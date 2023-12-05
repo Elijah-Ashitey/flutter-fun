@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_fun/state.management/bloc.counter.app/cubit/counter.cubit.dart';
+import 'package:flutter_fun/models/ui.model.dart';
 
-import 'bloc.counter.app/presentation/counter.page.dart';
+import 'bloc/bloc.counter.app/presentation/counter.page.dart';
+import 'bloc/bloc.todo/presentation/todo.dart';
 
 class StateManagement extends StatefulWidget {
   const StateManagement({super.key});
@@ -30,33 +30,30 @@ class _StateManagementState extends State<StateManagement> {
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10))),
               child: ListView(padding: EdgeInsets.zero, children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Card(
-                    child: ListTile(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => const CounterApp(
-                                title: "Counter App",
-                              ),
-                            ),
-                          );
-                        },
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 4),
-                        leading: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.network(
-                              "https://source.unsplash.com/user/c_v_r/100x100"),
-                        ),
-                        title: const Text("Bloc Weather App"),
-                        subtitle:
-                            const Text("A Weather Application using Bloc "),
-                        trailing: const Icon(Icons.keyboard_arrow_right)),
-                  ),
-                )
+                ...ui
+                    .map((e) => Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            child: ListTile(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (_) => e.screen),
+                                  );
+                                },
+                                contentPadding:
+                                    const EdgeInsets.symmetric(horizontal: 4),
+                                leading: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.network(e.image),
+                                ),
+                                title: Text(e.title),
+                                subtitle: Text(e.description),
+                                trailing:
+                                    const Icon(Icons.keyboard_arrow_right)),
+                          ),
+                        ))
+                    .toList()
               ]),
             ),
           ),
@@ -65,3 +62,20 @@ class _StateManagementState extends State<StateManagement> {
     );
   }
 }
+
+List<UIModel> ui = [
+  UIModel(
+    title: 'Counter Bloc App',
+    description: 'A simple counter application using Bloc ',
+    image: "https://source.unsplash.com/user/c_v_r/100x100",
+    screen: const CounterApp(
+      title: "Counter Application",
+    ),
+  ),
+  UIModel(
+    title: 'Simple Todo Bloc App',
+    description: 'A simple todo application using Bloc ',
+    image: "https://source.unsplash.com/user/c_v_r/100x100",
+    screen: const TodoScreen(),
+  ),
+];

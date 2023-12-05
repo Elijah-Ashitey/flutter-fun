@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_fun/state.management/bloc.counter.app/presentation/inc.dec.page.dart';
 
 import '../cubit/counter.cubit.dart';
+import 'inc.dec.page.dart';
 
 class CounterApp extends StatefulWidget {
   const CounterApp({super.key, required this.title});
