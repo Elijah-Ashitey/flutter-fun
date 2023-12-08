@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fun/constants.dart';
+import 'package:flutter_fun/state.management/bloc/bloc.login.validation/widgets/pallete.dart';
 
 import '../widgets/gradient.button.dart';
 import '../widgets/login_field.dart';
@@ -18,25 +20,27 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(66, 141, 140, 140),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             children: [
-              Image.asset('assets/images/signin_balls.png'),
+              Image.asset('${smImage}signin_balls.png'),
               const Text(
                 'Sign in.',
                 style: TextStyle(
+                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 50,
                 ),
               ),
               const SizedBox(height: 50),
               const SocialButton(
-                  iconPath: 'assets/svgs/g_logo.svg',
+                  iconPath: '${smSVG}g_logo.svg',
                   label: 'Continue with Google'),
               const SizedBox(height: 20),
               const SocialButton(
-                iconPath: 'assets/svgs/f_logo.svg',
+                iconPath: '${smSVG}f_logo.svg',
                 label: 'Continue with Facebook',
                 horizontalPadding: 90,
               ),
@@ -45,6 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 'or',
                 style: TextStyle(
                   fontSize: 17,
+                  color: Pallete.whiteColor,
                 ),
               ),
               const SizedBox(height: 15),

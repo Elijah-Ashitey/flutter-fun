@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_fun/constants.dart';
 
 import '../model/todo.model.dart';
 
@@ -18,12 +19,12 @@ class TodoCubit extends Cubit<List<TodoModel>> {
   @override
   void onChange(Change<List<TodoModel>> change) {
     super.onChange(change);
-    print("TodoCubit -- $change");
+    logger.i("TodoCubit -- $change");
   }
 
   @override
   void onError(Object error, StackTrace stackTrace) {
     super.onError(error, stackTrace);
-    print("TodoCubit Error -- $error ");
+    logger.e("TodoCubit Error -- $error ");
   }
 }

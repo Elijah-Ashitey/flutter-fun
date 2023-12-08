@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fun/models/ui.model.dart';
+import 'package:flutter_fun/state.management/bloc/bloc.login.validation/presentation/login.screen.dart';
 
 import 'bloc/bloc.counter.app/presentation/counter.page.dart';
 import 'bloc/bloc.todo/presentation/todo.dart';
@@ -77,5 +78,11 @@ List<UIModel> ui = [
     description: 'A simple todo application using Bloc ',
     image: "https://source.unsplash.com/user/c_v_r/100x100",
     screen: const TodoScreen(),
+  ),
+  UIModel(
+    title: 'Login Validation Bloc App',
+    description: 'A simple login application using Bloc ',
+    image: "https://source.unsplash.com/user/c_v_r/100x100",
+    screen: const LoginScreen(),
   ),
 ];

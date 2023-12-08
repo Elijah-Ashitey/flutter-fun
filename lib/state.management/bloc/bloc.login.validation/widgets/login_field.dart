@@ -20,23 +20,26 @@ class LoginField extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.all(27),
-          enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-              color: Pallete.borderColor,
-              width: 3,
+            contentPadding: const EdgeInsets.all(27),
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: Pallete.borderColor,
+                width: 1.5,
+              ),
+              borderRadius: BorderRadius.circular(10),
             ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-              color: Pallete.gradient2,
-              width: 3,
+            focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: Pallete.gradient2,
+                width: 3,
+              ),
+              borderRadius: BorderRadius.circular(10),
             ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          hintText: hintText,
-        ),
+            hintText: hintText,
+            hintStyle: const TextStyle(
+              color: Pallete.whiteColor,
+              fontSize: 17,
+            )),
       ),
     );
   }

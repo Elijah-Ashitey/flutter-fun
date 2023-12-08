@@ -37,7 +37,7 @@ class SocialButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           side: const BorderSide(
             color: Pallete.borderColor,
-            width: 3,
+            width: 1.5,
           ),
           borderRadius: BorderRadius.circular(10),
         ),

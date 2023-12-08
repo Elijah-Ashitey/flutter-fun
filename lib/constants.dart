@@ -1,3 +1,5 @@
+import 'package:logger/logger.dart';
+
 const String uiJson = 'assets/json/ui/';
 const String uiImage = 'assets/images/ui/';
 const String uiAudio = 'assets/audio/ui/';
@@ -22,3 +24,5 @@ const String servicesJson = 'assets/json/services/';
 const String servicesImage = 'assets/images/services/';
 const String servicesAudio = 'assets/audio/services/';
 const String servicesSVG = 'assets/svg/services/';
+
+Logger logger = Logger();
