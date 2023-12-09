@@ -22,6 +22,7 @@ class SocialButton extends StatelessWidget {
       icon: SvgPicture.asset(
         iconPath,
         width: 25,
+        // ignore: deprecated_member_use
         color: Pallete.whiteColor,
       ),
       label: Text(

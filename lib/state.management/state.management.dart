@@ -3,7 +3,8 @@ import 'package:flutter_fun/models/ui.model.dart';
 import 'package:flutter_fun/state.management/bloc/bloc.login.validation/presentation/login.screen.dart';
 
 import 'bloc/bloc.counter.app/presentation/counter.page.dart';
-import 'bloc/bloc.todo/presentation/todo.dart';
+import 'bloc/bloc.cubit.todo/presentation/todo.dart';
+import 'getx/to.do/ui/to.do.dart';
 
 class StateManagement extends StatefulWidget {
   const StateManagement({super.key});
@@ -84,5 +85,11 @@ List<UIModel> ui = [
     description: 'A simple login application using Bloc ',
     image: "https://source.unsplash.com/user/c_v_r/100x100",
     screen: const LoginScreen(),
+  ),
+  UIModel(
+    title: 'Task Management Application',
+    description: 'A simple todo using GET X ',
+    image: "https://source.unsplash.com/user/c_v_r/100x100",
+    screen: const ToDoApp(),
   ),
 ];

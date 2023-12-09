@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_fun/state.management/bloc/bloc.todo/cubit/todo.cubit.dart';
-import 'package:flutter_fun/state.management/bloc/bloc.todo/model/todo.model.dart';
+import 'package:flutter_fun/state.management/bloc/bloc.cubit.todo/cubit/todo.cubit.dart';
+import 'package:flutter_fun/state.management/bloc/bloc.cubit.todo/model/todo.model.dart';
 
 class TodoScreen extends StatefulWidget {
   const TodoScreen({super.key});
