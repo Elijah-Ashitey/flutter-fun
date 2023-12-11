@@ -1,5 +1,7 @@
 // for IOS notification setting, go to the AppDelegate, and add this
 
+// ignore_for_file: depend_on_referenced_packages
+
 /*  if #available(iOS 10.0, *) {
         UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
     }
@@ -7,17 +9,20 @@
 
 // for andriod add app image to the drawable
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
+
+import '../../../../constants.dart';
 
 class NotifyHelper {
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin(); //
 
   initializeNotification() async {
-    //tz.initializeTimeZones();
+    tz.initializeTimeZones();
     // this is for latest iOS settings
     final DarwinInitializationSettings initializationSettingsIOS =
         DarwinInitializationSettings(
@@ -43,9 +48,9 @@ class NotifyHelper {
 
   Future selectNotification(String? payload) async {
     if (payload != null) {
-      print('notification payload: $payload');
+      logger.i('notification payload: $payload');
     } else {
-      print("Notification Done");
+      logger.i("Notification Done");
     }
     Get.to(() => Container(
           color: Colors.red,
@@ -63,8 +68,40 @@ class NotifyHelper {
         );
   }
 
+  void requestAndroidPermissions() {
+    flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.requestExactAlarmsPermission();
+
+    flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.requestNotificationsPermission();
+  }
+
+  scheduledNotification() async {
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+        0,
+        'scheduled title',
+        'theme changes 5 seconds ago',
+        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
+        const NotificationDetails(
+            android: AndroidNotificationDetails(
+          'your channel id',
+          'your channel name',
+          channelDescription: 'your channel description',
+          importance: Importance.max,
+          priority: Priority.high,
+          ongoing: true,
+        )),
+        // androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime);
+  }
+
   displayNotification({required String title, required String body}) async {
-    print("doing test");
+    logger.i("doing test");
     var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
         'your channel id', 'your channel name',
         channelDescription: 'your channel description',
