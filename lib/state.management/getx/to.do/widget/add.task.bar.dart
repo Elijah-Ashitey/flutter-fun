@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fun/state.management/getx/to.do/controllers/task.controller.dart';
 import 'package:flutter_fun/state.management/getx/to.do/widget/add.task.page.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -31,8 +32,9 @@ class AddTaskBar extends StatelessWidget {
           ),
           MyButton(
               label: '+ Add Task',
-              onTap: () {
-                Get.to(const AddTaskPage());
+              onTap: () async {
+                await Get.to(const AddTaskPage());
+                TaskController().getTask();
               })
         ],
       ),

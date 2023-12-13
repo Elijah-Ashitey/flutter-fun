@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fun/state.management/bloc/bloc.login.validation/app.bloc.observer.dart';
 import 'package:flutter_fun/state.management/bloc/bloc.login.validation/bloc/auth.bloc.dart';
+import 'package:flutter_fun/state.management/getx/to.do/db/db_helper.dart';
 import 'package:flutter_fun/state.management/getx/to.do/services/theme.dart';
 import 'package:flutter_fun/state.management/getx/to.do/services/theme.services.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,7 @@ import 'state.management/bloc/bloc.counter.app/cubit/counter.cubit.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await DBHelper.init();
   await GetStorage.init();
   Bloc.observer = AppBlocOberver();
   runApp(const MyApp());

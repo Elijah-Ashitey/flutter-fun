@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import '../services/notification.services.dart';
 import '../widget/add.date.bar.dart';
 import '../widget/add.task.bar.dart';
+import '../widget/all.task.dart';
 
 class ToDoApp extends StatefulWidget {
   const ToDoApp({super.key});
@@ -64,6 +65,7 @@ class _ToDoAppState extends State<ToDoApp> {
       body: const Column(children: [
         AddTaskBar(),
         AddDateBar(),
+        AllMyTask(),
       ]),
     );
   }
