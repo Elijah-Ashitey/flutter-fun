@@ -1,5 +1,7 @@
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_fun/state.management/getx/to.do/controllers/task.controller.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../services/theme.dart';
@@ -12,6 +14,7 @@ class AddDateBar extends StatefulWidget {
 }
 
 class _AddDateBarState extends State<AddDateBar> {
+  final TaskController _taskController = Get.put(TaskController());
   DateTime selectedDate = DateTime.now();
 
   @override
@@ -49,6 +52,7 @@ class _AddDateBarState extends State<AddDateBar> {
         ),
         onDateChange: (DateTime date) {
           selectedDate = date;
+          _taskController.updateDate(date);
         },
       ),
     );

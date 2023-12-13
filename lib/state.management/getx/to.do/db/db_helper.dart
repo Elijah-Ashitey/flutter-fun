@@ -62,6 +62,10 @@ class DBHelper {
         .update('tasks', task.toMap(), where: "id=?", whereArgs: [task.id]);
   }
 
+  static Future<int> updateCompletedTask(int id) async {
+    return _db!.rawUpdate("UPDATE tasks SET isCompleted = 1 WHERE id = $id");
+  }
+
   static Future<int> deleteTask(int id) async {
     return _db!.delete('tasks', where: "id=?", whereArgs: [id]);
   }

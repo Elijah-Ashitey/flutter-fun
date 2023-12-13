@@ -298,11 +298,12 @@ class _AddTaskPageState extends State<AddTaskPage> {
       repeat: _selectedRepeat,
     ));
     if (value > 0) {
+      _taskController.getTask();
       Get.back();
       Get.snackbar(
         "Success",
         "Task Added Successfully",
-        snackPosition: SnackPosition.BOTTOM,
+        snackPosition: SnackPosition.TOP,
         backgroundColor: Colors.green,
         colorText: Colors.white,
         icon: const Icon(

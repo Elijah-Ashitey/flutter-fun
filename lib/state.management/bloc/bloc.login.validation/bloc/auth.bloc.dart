@@ -11,7 +11,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
   @override
   void onChange(Change<AuthState> change) {
-    logger.f("Auth bloc change --> $change");
+    logger.w("Auth bloc change --> $change");
     super.onChange(change);
   }
 

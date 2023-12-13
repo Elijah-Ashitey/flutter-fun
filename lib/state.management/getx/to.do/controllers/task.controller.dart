@@ -12,6 +12,15 @@ class TaskController extends GetxController {
   }
 
   var taskList = <Task>[].obs;
+  var selectedDate = DateTime.now().obs;
+
+  updateDate(DateTime date) {
+    selectedDate.value = date;
+    logger.wtf("current Data = ${selectedDate.value}");
+    selectedDate.refresh();
+    getTask();
+  }
+
   Future<int> addTask(Task task) async {
     return await DBHelper.insert(task);
   }
@@ -22,6 +31,7 @@ class TaskController extends GetxController {
     taskList.assignAll(task);
 
     logger.i("all task after assignment  ${taskList.length}");
+    taskList.refresh();
   }
 
   void deleteTask(int id) async {
@@ -43,6 +53,23 @@ class TaskController extends GetxController {
 
   void updateTask(Task task) async {
     await DBHelper.updateTask(task);
+    getTask();
+  }
+
+  void completedTask(int id) async {
+    int id0 = await DBHelper.updateCompletedTask(id);
+    logger.i(" completed id is $id0");
+    Get.snackbar(
+      "Success",
+      "Task Completed Successfully",
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.green,
+      colorText: Colors.white,
+      icon: const Icon(
+        Icons.check_circle_outline_rounded,
+        color: Colors.white,
+      ),
+    );
     getTask();
   }
 }

@@ -46,7 +46,6 @@ class _ToDoAppState extends State<ToDoApp> {
                   ? "Dark Mode Activated"
                   : "Light Mode Activated",
             );
-            notifyer.scheduledNotification();
           },
           child: Icon(
             Get.isDarkMode ? Icons.sunny : Icons.nightlight_round,
@@ -65,6 +64,7 @@ class _ToDoAppState extends State<ToDoApp> {
       body: const Column(children: [
         AddTaskBar(),
         AddDateBar(),
+        SizedBox(height: 20),
         AllMyTask(),
       ]),
     );

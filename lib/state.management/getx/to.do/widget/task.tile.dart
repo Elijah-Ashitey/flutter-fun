@@ -63,7 +63,7 @@ class TaskTile extends StatelessWidget {
                     textStyle: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
-                      color: Colors.grey.shade400,
+                      color: Colors.white.withOpacity(0.6),
                     ),
                   ),
                 ),

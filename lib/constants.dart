@@ -25,4 +25,4 @@ const String servicesImage = 'assets/images/services/';
 const String servicesAudio = 'assets/audio/services/';
 const String servicesSVG = 'assets/svg/services/';
 
-Logger logger = Logger();
+Logger logger = Logger(level: Logger.level);
