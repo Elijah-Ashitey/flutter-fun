@@ -1,7 +1,6 @@
 import 'package:flutter_fun/constants.dart';
 import 'package:flutter_fun/state.management/getx/to.do/models/task.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:sqflite/sqlite_api.dart';
 
 class DBHelper {
   static Database? _db;

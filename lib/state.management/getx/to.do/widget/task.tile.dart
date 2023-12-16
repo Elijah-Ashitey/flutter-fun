@@ -18,7 +18,7 @@ class TaskTile extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: _bgColor(task.color!),
+          color: bgColor(task.color!),
         ),
         child: Row(children: [
           Expanded(
@@ -93,12 +93,12 @@ class TaskTile extends StatelessWidget {
       ),
     );
   }
+}
 
-  Color _bgColor(int index) {
-    return index == 0
-        ? primaryClr
-        : index == 1
-            ? pinkClr
-            : yellowishClr;
-  }
+Color bgColor(int index) {
+  return index == 0
+      ? primaryClr
+      : index == 1
+          ? pinkClr
+          : yellowishClr;
 }

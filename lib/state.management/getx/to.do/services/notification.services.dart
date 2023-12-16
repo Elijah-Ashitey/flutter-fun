@@ -9,7 +9,11 @@
 
 // for andriod add app image to the drawable
 
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_fun/state.management/getx/to.do/ui/notified.page.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone_updated_gradle/flutter_native_timezone.dart';
 import 'package:get/get.dart';
@@ -44,20 +48,43 @@ class NotifyHelper {
     );
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
-
-      // onSelectNotification: selectNotification,
+      onDidReceiveNotificationResponse: (NotificationResponse response) async {
+        final String? payload = response.payload;
+        logger.wtf('Notification payload: $payload');
+        // Handle the tap event as needed
+        selectNotification(payload);
+      },
+      onDidReceiveBackgroundNotificationResponse:
+          (NotificationResponse response) async {
+        final String payload = response.payload ?? '';
+        logger.wtf('Background Notification payload: $payload');
+        // Handle the tap event as needed when the app is in the background
+        selectNotification(payload);
+      },
     );
   }
 
   Future selectNotification(String? payload) async {
+    log('$payload');
     if (payload != null) {
       logger.i('notification payload: $payload');
     } else {
       logger.i("Notification Done");
+
+      if (payload!.toLowerCase().contains('theme go nowhere')) {
+      } else {
+        Get.to(
+          () => NotifiedPage(
+            payload: payload,
+          ),
+        );
+      }
     }
-    Get.to(() => Container(
-          color: Colors.red,
-        ));
+    Get.to(
+      () => NotifiedPage(
+        payload: payload,
+      ),
+    );
   }
 
   void requestIOSPermissions() {
@@ -84,7 +111,9 @@ class NotifyHelper {
   }
 
   scheduledNotification(int hour, int minute, Task task) async {
+    logger.e("scheduled notification call for $hour : $minute");
     tz.TZDateTime time = _convertTime(hour, minute);
+
     await flutterLocalNotificationsPlugin.zonedSchedule(
       task.id!,
       '${task.title}',
@@ -105,7 +134,7 @@ class NotifyHelper {
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.time,
-      payload: '${task.title} | ${task.note} | ',
+      payload: jsonEncode(task.toMap()),
     );
   }
 
@@ -143,7 +172,7 @@ class NotifyHelper {
       title,
       body,
       platformChannelSpecifics,
-      payload: 'It could be anything you pass',
+      payload: 'Theme go nowhere',
     );
   }
 

@@ -55,7 +55,7 @@ TextStyle get headingStyle {
       textStyle: TextStyle(
     fontSize: 30,
     fontWeight: FontWeight.bold,
-    color: Get.isDarkMode ? Colors.white : Colors.black,
+    color: Get.isDarkMode ? Colors.white : Colors.grey,
   ));
 }
 

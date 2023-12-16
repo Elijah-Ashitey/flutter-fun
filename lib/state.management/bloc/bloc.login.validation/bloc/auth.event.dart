@@ -1,8 +1,8 @@
 part of 'auth.bloc.dart';
 
-sealed class AuthEvent {}
+class AuthEvent {}
 
-final class AuthLoginRequested extends AuthEvent {
+class AuthLoginRequested extends AuthEvent {
   final String username;
   final String password;
   AuthLoginRequested({
@@ -11,4 +11,4 @@ final class AuthLoginRequested extends AuthEvent {
   });
 }
 
-final class AuthLogoutRequested extends AuthEvent {}
+class AuthLogoutRequested extends AuthEvent {}

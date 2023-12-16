@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_fun/constants.dart';
 import 'package:flutter_fun/state.management/getx/to.do/controllers/task.controller.dart';
 import 'package:flutter_fun/state.management/getx/to.do/services/theme.dart';
+import 'package:flutter_fun/state.management/getx/to.do/ui/notified.page.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -34,19 +36,21 @@ class _AllMyTaskState extends State<AllMyTask> {
               logger.d("${task.date}  ==  $selectedDate");
 
               if (task.repeat == "Daily") {
-                String? myTime = task.startTime?.split(" ")[0];
+                // String? myTime = task.startTime?.split(" ")[0];
 
-                NotifyHelper().scheduledNotification(
-                  int.tryParse(myTime!.split(":")[0]) ?? 12,
-                  int.tryParse(myTime.split(":")[1]) ?? 12,
-                  task,
-                );
+                // NotifyHelper().scheduledNotification(
+                //   int.tryParse(myTime!.split(":")[0]) ?? 12,
+                //   int.tryParse(myTime.split(":")[1]) ?? 12,
+                //   task,
+                // );
 
                 return AnimationConfiguration.staggeredList(
                   position: i,
                   child: GestureDetector(
                     onTap: () {
-                      _showBottomSheet(task);
+                      logger.i(task.toMap());
+                      Get.to(NotifiedPage(payload: jsonEncode(task.toMap())));
+                      // _showBottomSheet(task);
                     },
                     child: SlideAnimation(
                         child: FadeInAnimation(
@@ -77,6 +81,12 @@ class _AllMyTaskState extends State<AllMyTask> {
   }
 
   _showBottomSheet(Task task) {
+    NotifyHelper().scheduledNotification(
+      01,
+      17,
+      task,
+    );
+
     Get.bottomSheet(Container(
       width: double.infinity,
       height: task.isCompleted == 1
