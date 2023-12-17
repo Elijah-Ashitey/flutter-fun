@@ -27,6 +27,24 @@ class NotifyHelper {
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin(); //
 
+  static selectNotification(String? payload) {
+    log('$payload');
+    if (payload != null) {
+      logger.i('notification payload: $payload');
+    } else {
+      logger.i("Notification Done");
+
+      if (payload!.toLowerCase().contains('theme go nowhere')) {
+      } else {
+        Get.to(
+          () => NotifiedPage(
+            payload: payload,
+          ),
+        );
+      }
+    }
+  }
+
   initializeNotification() async {
     // tz.initializeTimeZones();
     _configureLocalTimeZone();
@@ -48,42 +66,19 @@ class NotifyHelper {
     );
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
-      onDidReceiveNotificationResponse: (NotificationResponse response) async {
+      onDidReceiveNotificationResponse: (NotificationResponse response) {
         final String? payload = response.payload;
         logger.wtf('Notification payload: $payload');
         // Handle the tap event as needed
         selectNotification(payload);
       },
-      onDidReceiveBackgroundNotificationResponse:
-          (NotificationResponse response) async {
-        final String payload = response.payload ?? '';
-        logger.wtf('Background Notification payload: $payload');
-        // Handle the tap event as needed when the app is in the background
-        selectNotification(payload);
-      },
-    );
-  }
-
-  Future selectNotification(String? payload) async {
-    log('$payload');
-    if (payload != null) {
-      logger.i('notification payload: $payload');
-    } else {
-      logger.i("Notification Done");
-
-      if (payload!.toLowerCase().contains('theme go nowhere')) {
-      } else {
-        Get.to(
-          () => NotifiedPage(
-            payload: payload,
-          ),
-        );
-      }
-    }
-    Get.to(
-      () => NotifiedPage(
-        payload: payload,
-      ),
+      // onDidReceiveBackgroundNotificationResponse:
+      //     (NotificationResponse response) {
+      //   final String payload = response.payload ?? '';
+      //   logger.wtf('Background Notification payload: $payload');
+      //   // Handle the tap event as needed when the app is in the background
+      //   // selectNotification(payload);
+      // },
     );
   }
 
@@ -111,7 +106,7 @@ class NotifyHelper {
   }
 
   scheduledNotification(int hour, int minute, Task task) async {
-    logger.e("scheduled notification call for $hour : $minute");
+    // logger.e("scheduled notification call for $hour : $minute");
     tz.TZDateTime time = _convertTime(hour, minute);
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
@@ -155,7 +150,6 @@ class NotifyHelper {
   }
 
   displayNotification({required String title, required String body}) async {
-    logger.i("doing test");
     var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
         'your channel id', 'your channel name',
         channelDescription: 'your channel description',
