@@ -27,22 +27,22 @@ class _AllMyTaskState extends State<AllMyTask> {
       child: Obx(() {
         String selectedDate =
             DateFormat.yMd().format(_taskController.selectedDate.value);
-        logger.e("date now is ${_taskController.selectedDate.value}");
+        // logger.e("date now is ${_taskController.selectedDate.value}");
         return ListView.builder(
             itemCount: _taskController.taskList.length,
             itemBuilder: (_, i) {
               Task task = _taskController.taskList[i];
 
-              logger.d("${task.date}  ==  $selectedDate");
+              // logger.d("${task.date}  ==  $selectedDate");
 
               if (task.repeat == "Daily") {
-                // String? myTime = task.startTime?.split(" ")[0];
+                String? myTime = task.startTime?.split(" ")[0];
 
-                // NotifyHelper().scheduledNotification(
-                //   int.tryParse(myTime!.split(":")[0]) ?? 12,
-                //   int.tryParse(myTime.split(":")[1]) ?? 12,
-                //   task,
-                // );
+                NotifyHelper().scheduledNotification(
+                  int.tryParse(myTime!.split(":")[0]) ?? 12,
+                  int.tryParse(myTime.split(":")[1]) ?? 12,
+                  task,
+                );
 
                 return AnimationConfiguration.staggeredList(
                   position: i,
