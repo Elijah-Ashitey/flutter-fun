@@ -29,12 +29,12 @@ class NotifyHelper {
 
   static selectNotification(String? payload) {
     log('$payload');
-    if (payload != null) {
+    if (payload == null) {
       logger.i('notification payload: $payload');
     } else {
       logger.i("Notification Done");
 
-      if (payload!.toLowerCase().contains('theme go nowhere')) {
+      if (payload.toLowerCase().contains('theme go nowhere')) {
       } else {
         Get.to(
           () => NotifiedPage(
