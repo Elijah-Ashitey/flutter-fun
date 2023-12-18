@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../constants.dart';
 import 'utils/color.theme.dart';
 import 'widget/coffee.card.dart';
+import 'widget/special.coffee.card.dart';
 import 'widget/tabs.dart';
 
 class CoffeeUI extends StatefulWidget {
@@ -109,7 +110,19 @@ class _CoffeeUIState extends State<CoffeeUI> {
                         image: e['image']))
                     .toList(),
               ],
-            )
+            ),
+            const SizedBox(height: 40),
+
+            Text(
+              "Special for you",
+              style: GoogleFonts.montserrat(
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+                fontSize: 18,
+              ),
+            ),
+            const SpecialCoffeeCard(),
+            const SpecialCoffeeCard()
           ],
         ),
       ),
