@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,13 +12,14 @@ class CoffeeDetils extends StatelessWidget {
   final String subtitle;
   final String price;
   final String image;
-  const CoffeeDetils(
-      {super.key,
-      required this.rating,
-      required this.name,
-      required this.subtitle,
-      required this.price,
-      required this.image});
+  const CoffeeDetils({
+    super.key,
+    required this.rating,
+    required this.name,
+    required this.subtitle,
+    required this.price,
+    required this.image,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,93 +42,112 @@ class CoffeeDetils extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: Container(
-              padding: const EdgeInsets.all(20),
+              height: 150,
+              width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: CoffeeColorTheme.pColor.withOpacity(0.9),
+                color: CoffeeColorTheme.coffeeColor.withOpacity(0.3),
               ),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+              child: BackdropFilter(
+                filter: ImageFilter.blur(
+                  sigmaX: 1.0,
+                  sigmaY: 1.0,
+                ),
+                child: Container(
+                  height: 150,
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(20),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          name,
-                          style: CoffeeColorTheme.normalTextStyle.copyWith(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          subtitle,
-                          style: CoffeeColorTheme.normalTextStyle.copyWith(
-                            fontSize: 14,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Row(
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Icon(Icons.star),
                             Text(
-                              rating,
+                              name,
                               style: CoffeeColorTheme.normalTextStyle.copyWith(
                                 fontSize: 16,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            const SizedBox(width: 5),
                             Text(
-                              "(6.986)",
+                              subtitle,
                               style: CoffeeColorTheme.normalTextStyle.copyWith(
-                                fontSize: 12,
+                                fontSize: 14,
                                 color: Colors.white,
                               ),
                             ),
+                            const SizedBox(height: 20),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.star,
+                                  color: CoffeeColorTheme.pColor,
+                                ),
+                                const SizedBox(width: 5),
+                                Text(
+                                  rating,
+                                  style:
+                                      CoffeeColorTheme.normalTextStyle.copyWith(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(width: 5),
+                                Text(
+                                  "(6.986)",
+                                  style:
+                                      CoffeeColorTheme.normalTextStyle.copyWith(
+                                    fontSize: 12,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            )
                           ],
-                        )
-                      ],
-                    ),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Row(
+                        ),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            CoffeElement(
-                              element: 'Coffee',
-                              icon: Icons.coffee,
+                            const Row(
+                              children: [
+                                CoffeElement(
+                                  element: 'Coffee',
+                                  icon: Icons.coffee,
+                                ),
+                                SizedBox(width: 30),
+                                CoffeElement(
+                                  element: 'Milk',
+                                  icon: Icons.water_drop,
+                                ),
+                              ],
                             ),
-                            SizedBox(width: 30),
-                            CoffeElement(
-                              element: 'Milk',
-                              icon: Icons.water_drop,
+                            const SizedBox(height: 20),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 8, horizontal: 16),
+                              decoration: BoxDecoration(
+                                color: CoffeeColorTheme.bgColor,
+                                borderRadius: BorderRadius.circular(7),
+                              ),
+                              child: Text(
+                                "Medium Roasted",
+                                style:
+                                    CoffeeColorTheme.normalTextStyle.copyWith(
+                                  fontSize: 9,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 20),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8, horizontal: 16),
-                          decoration: BoxDecoration(
-                            color: CoffeeColorTheme.bgColor,
-                            borderRadius: BorderRadius.circular(7),
-                          ),
-                          child: Text(
-                            "Medium Roasted",
-                            style: CoffeeColorTheme.normalTextStyle.copyWith(
-                              fontSize: 9,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ]),
+                      ]),
+                ),
+              ),
             ),
           ),
           Align(
